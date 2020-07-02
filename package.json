@@ -1,5 +1,5 @@
 {
-  "name": "quick-logger",
+  "name": "@isirthijs/quick-logger",
   "version": "1.0.0",
   "description": "A simple logger to be bundled in your webapp/library!",
   "main": "src/index.mjs",
