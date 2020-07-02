@@ -1,0 +1,20 @@
+{
+  "name": "quick-logger",
+  "version": "0.0.0",
+  "description": "A simple logger to be bundled in your webapp/library!",
+  "main": "src/index.mjs",
+  "scripts": {
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iSirThijs/quick-logger.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/iSirThijs/quick-logger/issues"
+  },
+  "homepage": "https://github.com/iSirThijs/quick-logger#readme",
+  "dependencies": {},
+  "devDependencies": {}
+}
