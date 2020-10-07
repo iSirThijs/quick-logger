@@ -33,31 +33,24 @@ class Logger {
 		let styledLabel = `%c[${this.label}.${id}]%c`
 		let finalMsg = `${styledLabel}  ${msg}`
 		
-		return groupConsole()
-		
-		function groupConsole() {
-			console.debug(finalMsg, ...this.styles)
-			if (args.lenght > 0) {
-				console.groupCollapsed('Trace Information')
-				args.forEach(console.debug)
-				console.groupEnd()
-			}
+		if (args.length > 0) {
+			console.groupCollapsed('Trace Information')
+			args.forEach((arg) => console.debug(arg))
+			console.groupEnd()
 		}
+		
+		return console.debug(finalMsg, ...this.styles)
 	}
 	
 	debug(msg, ...args) {
 		let finalMsg = `${this.styledLabel}  ${msg}`
 		
-		return groupConsole()
-		
-		function groupConsole() {
-			console.debug(finalMsg, ...this.styles)
-			if (args.lenght > 0) {
-				console.groupCollapsed('Debug Information')
-				args.forEach(console.debug)
-				console.groupEnd()
-			}
+		if (args.length > 0) {
+			console.groupCollapsed('Debug Information')
+			args.forEach((arg) => console.debug(arg))
+			console.groupEnd()
 		}
+		return console.debug(finalMsg, ...this.styles)
 	}
    
 	log(msg, ...args) {
@@ -70,16 +63,9 @@ class Logger {
 		return console.warn(finalMsg, ...this.styles, ...args)
 	}
 	
-	error(msg, error) {
+	error(msg) {
 		let finalMsg = `${this.styledLabel}  ${msg}`
-		return groupConsole()
-		
-		function groupConsole() {
-			console.error(finalMsg, ...this.styles)
-			console.group('Error:')
-			console.error(error)
-			console.groupEnd()
-		}
+		return console.error(finalMsg, ...this.styles)
 	}
 
 	info(msg, ...args){

@@ -41,11 +41,19 @@ const logger2 = quicklogger('mylabel:mysublabel');
 
 ### Using the logger
 ```js
+
+// Trace and logger both allow additional arguments to be passed. These will be displayed in collapsed groups
+logger.trace('Message', '1234') // Trace needs an ID to add to the message (so you can group something)
 logger.debug('Obligatory')
-logger.info('Hello')
-logger.error('World')
-logger.warn('Hello')
+
+// These methods also allow to be passed additional arguments, but will pass it trough to their native function
 logger.log('World')
+logger.info('Hello')
+logger.warn('Hello')
+
+// Error only takes 1 argument!
+logger.error('World')
+
 ```
 
 ## Full API
