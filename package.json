@@ -15,5 +15,7 @@
   },
   "homepage": "https://github.com/iSirThijs/quick-logger#readme",
   "dependencies": {},
-  "devDependencies": {}
+  "devDependencies": {
+    "eslint": "^7.10.0"
+  }
 }
