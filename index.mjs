@@ -1,63 +1,96 @@
 export default function quickLogger(label){
-	if(!Logger._instances) Logger._instances  = [];
+	if(!Logger._instances) Logger._instances  = []
 	
-	let existingLogger = Logger._instances.find(_instance => _instance.label === label);
-	if(existingLogger) return existingLogger;
+	let existingLogger = Logger._instances.find(_instance => _instance.label === label)
+	if(existingLogger) return existingLogger
 	
 	let splitLabel = label.split(':')
-	let color = undefined;
+	let color = undefined
 	
 	if(splitLabel.length > 1) {
 		let existingLogger = Logger._instances.find(_instance => _instance.label === splitLabel[0])
-		color = existingLogger ? existingLogger.color : randomColor();
+		color = existingLogger ? existingLogger.color : randomColor()
 	} else {
-		color = randomColor();
+		color = randomColor()
 	}
 
-	let logger = new Logger(label, color);
+	let logger = new Logger(label, color)
 
-	Logger._instances.push(logger);
+	Logger._instances.push(logger)
 	return logger
 }
 
 
 class Logger {
 	constructor(label, color) {
-		this.label = label;
-		this.color = color;
-		this.styledLabel = `%c${label}%c`
+		this.label = label
+		this.color = color
+		this.styledLabel = `%c[${label}]%c`
 		this.styles = [`color: ${color}; font-weight: bold`, '']
+	}
+	
+	trace(msg, id, ...args) {
+		let styledLabel = `%c[${this.label}.${id}]%c`
+		let finalMsg = `${styledLabel}  ${msg}`
+		
+		return groupConsole()
+		
+		function groupConsole() {
+			console.debug(finalMsg, ...this.styles)
+			if (args.lenght > 0) {
+				console.groupCollapsed('Trace Information')
+				args.forEach(console.debug)
+				console.groupEnd()
+			}
+		}
 	}
 	
 	debug(msg, ...args) {
 		let finalMsg = `${this.styledLabel}  ${msg}`
-		return console.debug(finalMsg, ...this.styles, )
+		
+		return groupConsole()
+		
+		function groupConsole() {
+			console.debug(finalMsg, ...this.styles)
+			if (args.lenght > 0) {
+				console.groupCollapsed('Debug Information')
+				args.forEach(console.debug)
+				console.groupEnd()
+			}
+		}
 	}
    
-	log(msg) {
+	log(msg, ...args) {
 		let finalMsg = `${this.styledLabel}  ${msg}`
-		return console.log(finalMsg, ...this.styles)
+		return console.log(finalMsg, ...this.styles, ...args)
 	}
 
-	warn(msg) {
+	warn(msg, ...args) {
 		let finalMsg = `${this.styledLabel}  ${msg}`
-		return console.warn(finalMsg, ...this.styles)
+		return console.warn(finalMsg, ...this.styles, ...args)
 	}
 	
-	error(msg) {
+	error(msg, error) {
 		let finalMsg = `${this.styledLabel}  ${msg}`
-		return console.error(finalMsg, ...this.styles)
+		return groupConsole()
+		
+		function groupConsole() {
+			console.error(finalMsg, ...this.styles)
+			console.group('Error:')
+			console.error(error)
+			console.groupEnd()
+		}
 	}
 
-	info(msg){
+	info(msg, ...args){
 		let finalMsg = `${this.styledLabel}  ${msg}`
-		return console.info(finalMsg, ...this.styles)
+		return console.info(finalMsg, ...this.styles, ...args)
 	}
 	
 }
 
 const randomColor = (() => {
-	let lastUsed = 0;
+	let lastUsed = 0
 	let colors = [
 		'#F2777A',
 		'#F99157',
@@ -69,7 +102,7 @@ const randomColor = (() => {
 	]
 
 	return () => {
-		lastUsed++;
+		lastUsed++
 		return colors[lastUsed % colors.length]
 	}
 

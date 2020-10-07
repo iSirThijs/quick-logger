@@ -1,6 +1,6 @@
 {
   "name": "@isirthijs/quick-logger",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "A simple logger to be bundled in your webapp/library!",
   "main": "src/index.mjs",
   "scripts": {},
@@ -15,5 +15,7 @@
   },
   "homepage": "https://github.com/iSirThijs/quick-logger#readme",
   "dependencies": {},
-  "devDependencies": {}
+  "devDependencies": {
+    "eslint": "^7.10.0"
+  }
 }
